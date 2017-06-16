@@ -25,9 +25,10 @@ args = parser.parse_args()
 if args.path.startswith("http://") or args.path.startswith("https://"):
     r = requests.get(args.path)
     if r.status_code != requests.codes.ok:
-        print("ERROR: couldn't fetch summary file:")
         print(r.headers)
         print(r.text)
+        print("ERROR: couldn't fetch summary file")
+        sys.exit(1)
     bytedata = GLib.Bytes.new(r.content)
 else:
     with open(args.path) as f:
