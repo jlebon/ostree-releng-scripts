@@ -27,8 +27,7 @@ if args.path.startswith("http://") or args.path.startswith("https://"):
     if r.status_code != requests.codes.ok:
         print(r.headers)
         print(r.text)
-        print("ERROR: couldn't fetch summary file")
-        sys.exit(1)
+        fatal("Couldn't fetch summary file")
     bytedata = GLib.Bytes.new(r.content)
 else:
     with open(args.path) as f:
